@@ -1,0 +1,20 @@
+%section
+	.large-3.columns
+	.large-9.columns
+		%h4 Genomes!
+		%hr
+
+
+		%table.fixed-size
+			%thead
+				%tr
+					%th.center Genome Name
+					%th.center Number of Sites
+			%tbody
+				-@genomes.each do |g|
+					%tr{:class => 'clickableRow', :href => "/genomes/" + g.id.to_s + "/show"}
+					%td.center
+						%span.genome_name
+							=g.name
+					%td.center
+						=g.id

@@ -1,0 +1,714 @@
+%section
+	.left.column
+		Hi
+	.right.column
+		.panel
+			%h4 #{@genome.name.upcase} (#{@genome.kingdom})
+			%hr
+		%br
+		%br
+		.panel
+			%h4 General Overview
+			%hr
+				%table
+					%thead 
+						%tr
+							%th.center Number Sites
+							%th.center Number Sites in Genes
+							%th.center Number Stem Loops
+							%th.center Number Stem Loops in Genes
+					%tbody
+						%tr
+							%td.center #{@sites.count}
+							%td.center #{@real_sites.count}
+							%td.center #{@stem_loops.count}
+							%td.center #{@real_stem_loops.count}
+		%br	
+		.panel
+			%h4 Types of Sites
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center GAGG
+							%th.center GTGG
+							%th.center GAGA
+					%tbody
+						%tr
+							%td.center #{@gagg.count}
+							%td.center #{@gtgg.count}
+							%td.center #{@gaga.count}
+
+
+		%br
+		.panel
+			%h4 Stem Loops
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center R = 0 (G)
+							%th.center R = 1 (G)
+							%th.center R = 2 (G)
+					%tbody
+						%tr
+							%td.center #{@stem_0.count}
+							%td.center #{@stem_1.count}
+							%td.center #{@stem_2.count}
+							%td.center #{@real_stem_0.count}
+							%td.center #{@real_stem_1.count}
+							%td.center #{@real_stem_2.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 Sites in Genes
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@real_sites.select{|m| m.r_value == 0}.count}
+							%td.center #{@real_sites.select{|m| m.r_value == 1}.count}
+							%td.center #{@real_sites.select{|m| m.r_value == 2}.count}
+							%td.center #{@real_sites.select{|m| m.c_value == 1}.count}
+							%td.center #{@real_sites.select{|m| m.c_value == 2}.count}
+							%td.center #{@real_sites.select{|m| m.c_value == 3}.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 THIRDS
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center First Third
+							%th.center Second Third
+							%th.center Last Third
+							%th.center First Half
+							%th.center Second Half
+					%tbody
+						%tr
+							%td.center #{@first_third.count}
+							%td.center #{@second_third.count}
+							%td.center #{@last_third.count}
+							%td.center #{@first_half.count}
+							%td.center #{@second_half.count}
+
+
+
+		%br
+		%br
+		.panel
+			%h4 First Third
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@first_third.select{|m| m.r_value == 0}.count}
+							%td.center #{@first_third.select{|m| m.r_value == 1}.count}
+							%td.center #{@first_third.select{|m| m.r_value == 2}.count}
+							%td.center #{@first_third.select{|m| m.c_value == 1}.count}
+							%td.center #{@first_third.select{|m| m.c_value == 2}.count}
+							%td.center #{@first_third.select{|m| m.c_value == 3}.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 Second Third
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@second_third.select{|m| m.r_value == 0}.count}
+							%td.center #{@second_third.select{|m| m.r_value == 1}.count}
+							%td.center #{@second_third.select{|m| m.r_value == 2}.count}
+							%td.center #{@second_third.select{|m| m.c_value == 1}.count}
+							%td.center #{@second_third.select{|m| m.c_value == 2}.count}
+							%td.center #{@second_third.select{|m| m.c_value == 3}.count}
+
+		%br
+		%br
+		.panel
+			%h4 Last Third
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@last_third.select{|m| m.r_value == 0}.count}
+							%td.center #{@last_third.select{|m| m.r_value == 1}.count}
+							%td.center #{@last_third.select{|m| m.r_value == 2}.count}
+							%td.center #{@last_third.select{|m| m.c_value == 1}.count}
+							%td.center #{@last_third.select{|m| m.c_value == 2}.count}
+							%td.center #{@last_third.select{|m| m.c_value == 3}.count}
+
+
+
+
+		%br
+		%br
+		.panel
+			%h4 Stem Strength
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center 4
+							%th.center 5
+							%th.center 6
+							%th.center >= 7
+					%tbody
+						%tr
+							%td.center #{@stem_four.count}
+							%td.center #{@stem_five.count}
+							%td.center #{@stem_six.count}
+							%td.center #{@stem_high.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 Stem - 4
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@stem_four.select{|m| m.r_value == 0}.count}
+							%td.center #{@stem_four.select{|m| m.r_value == 1}.count}
+							%td.center #{@stem_four.select{|m| m.r_value == 2}.count}
+							%td.center #{@stem_four.select{|m| m.c_value == 1}.count}
+							%td.center #{@stem_four.select{|m| m.c_value == 2}.count}
+							%td.center #{@stem_four.select{|m| m.c_value == 3}.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 Stem - 5
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@stem_five.select{|m| m.r_value == 0}.count}
+							%td.center #{@stem_five.select{|m| m.r_value == 1}.count}
+							%td.center #{@stem_five.select{|m| m.r_value == 2}.count}
+							%td.center #{@stem_five.select{|m| m.c_value == 1}.count}
+							%td.center #{@stem_five.select{|m| m.c_value == 2}.count}
+							%td.center #{@stem_five.select{|m| m.c_value == 3}.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 Stem - 6
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@stem_six.select{|m| m.r_value == 0}.count}
+							%td.center #{@stem_six.select{|m| m.r_value == 1}.count}
+							%td.center #{@stem_six.select{|m| m.r_value == 2}.count}
+							%td.center #{@stem_six.select{|m| m.c_value == 1}.count}
+							%td.center #{@stem_six.select{|m| m.c_value == 2}.count}
+							%td.center #{@stem_six.select{|m| m.c_value == 3}.count}
+
+
+
+		%br
+		%br
+		.panel
+			%h4 Stem - High
+			%hr
+				%table
+					%thead
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2 
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@stem_high.select{|m| m.r_value == 0}.count}
+							%td.center #{@stem_high.select{|m| m.r_value == 1}.count}
+							%td.center #{@stem_high.select{|m| m.r_value == 2}.count}
+							%td.center #{@stem_high.select{|m| m.c_value == 1}.count}
+							%td.center #{@stem_high.select{|m| m.c_value == 2}.count}
+							%td.center #{@stem_high.select{|m| m.c_value == 3}.count}
+
+
+		.panel
+			%h4 TOTAL PLUS STRAND (#{@plus_strand.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@plus_strand.select{|m| m.r_value == 0}.count} 
+							%td.center #{@plus_strand.select{|m| m.r_value == 1}.count}
+							%td.center #{@plus_strand.select{|m| m.r_value == 2}.count}
+							%td.center #{@plus_strand.select{|m| m.c_value == 1}.count}
+							%td.center #{@plus_strand.select{|m| m.c_value == 2}.count}
+							%td.center #{@plus_strand.select{|m| m.c_value == 3}.count}
+
+		.panel
+			%h4 TOTAL MINUS STRAND (#{@minus_strand.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@minus_strand.select{|m| m.r_value == 0}.count}
+							%td.center #{@minus_strand.select{|m| m.r_value == 1}.count}
+							%td.center #{@minus_strand.select{|m| m.r_value == 2}.count}
+							%td.center #{@minus_strand.select{|m| m.c_value == 1}.count}
+							%td.center #{@minus_strand.select{|m| m.c_value == 2}.count}
+							%td.center #{@minus_strand.select{|m| m.c_value == 3}.count}
+
+
+		.panel
+			%h4 TOTAL CODING STRAND (#{@coding_strand.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@coding_strand.select{|m| m.r_value == 0}.count}
+							%td.center #{@coding_strand.select{|m| m.r_value == 1}.count}
+							%td.center #{@coding_strand.select{|m| m.r_value == 2}.count}
+							%td.center #{@coding_strand.select{|m| m.c_value == 1}.count}
+							%td.center #{@coding_strand.select{|m| m.c_value == 2}.count}
+							%td.center #{@coding_strand.select{|m| m.c_value == 3}.count}
+
+
+
+		.panel
+			%h4 TOTAL TEMPLATE STRAND (#{@template_strand.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@template_strand.select{|m| m.r_value == 0}.count}
+							%td.center #{@template_strand.select{|m| m.r_value == 1}.count}
+							%td.center #{@template_strand.select{|m| m.r_value == 2}.count}
+							%td.center #{@template_strand.select{|m| m.c_value == 1}.count}
+							%td.center #{@template_strand.select{|m| m.c_value == 2}.count}
+							%td.center #{@template_strand.select{|m| m.c_value == 3}.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 GAGA PLUS STRAND (#{@gaga_plus.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gaga_plus.select{|m| m.r_value == 0}.count}
+							%td.center #{@gaga_plus.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_plus.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_plus.select{|m| m.c_value == 1}.count}
+							%td.center #{@gaga_plus.select{|m| m.c_value == 2}.count}
+							%td.center #{@gaga_plus.select{|m| m.c_value == 3}.count}
+
+		.panel
+			%h4 GAGA MINUS STRAND (#{@gaga_minus.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gaga_minus.select{|m| m.r_value == 0}.count}
+							%td.center #{@gaga_minus.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_minus.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_minus.select{|m| m.c_value == 1}.count}
+							%td.center #{@gaga_minus.select{|m| m.c_value == 2}.count}
+							%td.center #{@gaga_minus.select{|m| m.c_value == 3}.count}
+
+
+		.panel
+			%h4 GAGA CODING STRAND (#{@gaga_coding.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gaga_coding.select{|m| m.r_value == 0}.count}
+							%td.center #{@gaga_coding.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_coding.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_coding.select{|m| m.c_value == 1}.count}
+							%td.center #{@gaga_coding.select{|m| m.c_value == 2}.count}
+							%td.center #{@gaga_coding.select{|m| m.c_value == 3}.count}
+
+
+
+		.panel
+			%h4 GAGA TEMPLATE STRAND (#{@gaga_template.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gaga_template.select{|m| m.r_value == 0}.count}
+							%td.center #{@gaga_template.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_template.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_template.select{|m| m.c_value == 1}.count}
+							%td.center #{@gaga_template.select{|m| m.c_value == 2}.count}
+							%td.center #{@gaga_template.select{|m| m.c_value == 3}.count}
+
+		%br
+		%br
+		.panel
+			%h4 GAGG PLUS STRAND (#{@gagg_plus.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gagg_plus.select{|m| m.r_value == 0}.count}
+							%td.center #{@gagg_plus.select{|m| m.r_value == 1}.count}
+							%td.center #{@gagg_plus.select{|m| m.r_value == 2}.count}
+							%td.center #{@gagg_plus.select{|m| m.c_value == 1}.count}
+							%td.center #{@gagg_plus.select{|m| m.c_value == 2}.count}
+							%td.center #{@gagg_plus.select{|m| m.c_value == 3}.count}
+
+		.panel
+			%h4 GAGG MINUS STRAND (#{@gagg_minus.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gagg_minus.select{|m| m.r_value == 0}.count}
+							%td.center #{@gagg_minus.select{|m| m.r_value == 1}.count}
+							%td.center #{@gagg_minus.select{|m| m.r_value == 2}.count}
+							%td.center #{@gagg_minus.select{|m| m.c_value == 1}.count}
+							%td.center #{@gagg_minus.select{|m| m.c_value == 2}.count}
+							%td.center #{@gagg_minus.select{|m| m.c_value == 3}.count}
+
+
+		.panel
+			%h4 GAGG CODING STRAND (#{@gagg_coding.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gagg_coding.select{|m| m.r_value == 0}.count}
+							%td.center #{@gagg_coding.select{|m| m.r_value == 1}.count}
+							%td.center #{@gagg_coding.select{|m| m.r_value == 2}.count}
+							%td.center #{@gagg_coding.select{|m| m.c_value == 1}.count}
+							%td.center #{@gagg_coding.select{|m| m.c_value == 2}.count}
+							%td.center #{@gagg_coding.select{|m| m.c_value == 3}.count}
+
+
+
+		.panel
+			%h4 GAGG TEMPLATE STRAND (#{@gagg_template.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gagg_template.select{|m| m.r_value == 0}.count}
+							%td.center #{@gagg_template.select{|m| m.r_value == 1}.count}
+							%td.center #{@gagg_template.select{|m| m.r_value == 2}.count}
+							%td.center #{@gagg_template.select{|m| m.c_value == 1}.count}
+							%td.center #{@gagg_template.select{|m| m.c_value == 2}.count}
+							%td.center #{@gagg_template.select{|m| m.c_value == 3}.count}
+
+
+		%br
+		%br
+		.panel
+			%h4 GTGG PLUS STRAND (#{@gtgg_plus.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gtgg_plus.select{|m| m.r_value == 0}.count}
+							%td.center #{@gtgg_plus.select{|m| m.r_value == 1}.count}
+							%td.center #{@gtgg_plus.select{|m| m.r_value == 2}.count}
+							%td.center #{@gtgg_plus.select{|m| m.c_value == 1}.count}
+							%td.center #{@gtgg_plus.select{|m| m.c_value == 2}.count}
+							%td.center #{@gtgg_plus.select{|m| m.c_value == 3}.count}
+
+		.panel
+			%h4 GTGG MINUS STRAND (#{@gtgg_minus.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gtgg_minus.select{|m| m.r_value == 0}.count}
+							%td.center #{@gtgg_minus.select{|m| m.r_value == 1}.count}
+							%td.center #{@gtgg_minus.select{|m| m.r_value == 2}.count}
+							%td.center #{@gtgg_minus.select{|m| m.c_value == 1}.count}
+							%td.center #{@gtgg_minus.select{|m| m.c_value == 2}.count}
+							%td.center #{@gtgg_minus.select{|m| m.c_value == 3}.count}
+
+
+		.panel
+			%h4 GTGG CODING STRAND (#{@gtgg_coding.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gtgg_coding.select{|m| m.r_value == 0}.count}
+							%td.center #{@gtgg_coding.select{|m| m.r_value == 1}.count}
+							%td.center #{@gtgg_coding.select{|m| m.r_value == 2}.count}
+							%td.center #{@gtgg_coding.select{|m| m.c_value == 1}.count}
+							%td.center #{@gtgg_coding.select{|m| m.c_value == 2}.count}
+							%td.center #{@gtgg_coding.select{|m| m.c_value == 3}.count}
+
+
+
+		.panel
+			%h4 GTGG TEMPLATE STRAND (#{@gtgg_template.count})
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center R = 0
+							%th.center R = 1
+							%th.center R = 2
+							%th.center C = 1
+							%th.center C = 2
+							%th.center C = 3
+					%tbody
+						%tr
+							%td.center #{@gtgg_template.select{|m| m.r_value == 0}.count}
+							%td.center #{@gtgg_template.select{|m| m.r_value == 1}.count}
+							%td.center #{@gtgg_template.select{|m| m.r_value == 2}.count}
+							%td.center #{@gtgg_template.select{|m| m.c_value == 1}.count}
+							%td.center #{@gtgg_template.select{|m| m.c_value == 2}.count}
+							%td.center #{@gtgg_template.select{|m| m.c_value == 3}.count}
+
+
+		.panel
+			%h4 GAGA broken down
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center plus coding
+							%th.center plus template
+							%th.center minus coding
+							%th.center minus template
+					%tbody
+						%tr
+							%td.center #{@gaga_plus_coding.count}
+							%td.center #{@gaga_plus_template.count}
+							%td.center #{@gaga_minus_coding.count}
+							%td.center #{@gaga_minus_template.count}
+
+
+		.panel
+			%h4 GAGA broken down (R=1)
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center plus coding
+							%th.center plus template
+							%th.center minus coding
+							%th.center minus template
+					%tbody
+						%tr
+							%td.center #{@gaga_plus_coding.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_plus_template.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_minus_coding.select{|m| m.r_value == 1}.count}
+							%td.center #{@gaga_minus_template.select{|m| m.r_value == 1}.count}
+
+		.panel
+			%h4 GAGA broken down (R=2)
+			%hr
+				%table 
+					%thead 
+						%tr
+							%th.center plus coding
+							%th.center plus template
+							%th.center minus coding
+							%th.center minus template
+					%tbody
+						%tr
+							%td.center #{@gaga_plus_coding.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_plus_template.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_minus_coding.select{|m| m.r_value == 2}.count}
+							%td.center #{@gaga_minus_template.select{|m| m.r_value == 2}.count}
+
+
+
+
