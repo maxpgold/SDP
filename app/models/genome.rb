@@ -86,7 +86,39 @@ class Genome < ActiveRecord::Base
     template_r_summary = template.map{|m| m.r_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
     template_r_percents = template_r_summary.map{|m| (m[1].to_f / template.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
     template_c_summary = template.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]} 
-    template_c_percents = template_c_summary.map{|m| (m[1].to_f / template.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}   
+    template_c_percents = template_c_summary.map{|m| (m[1].to_f / template.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+
+    #stem_strength
+
+    #4 base
+    four_base = filtered_sites.select{|m| m.strength == 4}
+    four_base_r_summary = four_base.map{|m| m.r_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    four_base_r_percents = four_base_r_summary.map{|m| (m[1].to_f/ four_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+    four_base_c_summary = four_base.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    four_base_c_percents = four_base_c_summary.map{|m| (m[1].to_f / four_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+
+    #5 base
+    five_base = filtered_sites.select{|m| m.strength == 5}
+    five_base_r_summary = five_base.map{|m| m.r_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    five_base_r_percents = five_base_r_summary.map{|m| (m[1].to_f/ five_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+    five_base_c_summary = five_base.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    five_base_c_percents = five_base_c_summary.map{|m| (m[1].to_f / five_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+
+    #6 base
+    six_base = filtered_sites.select{|m| m.strength == 6}
+    six_base_r_summary = six_base.map{|m| m.r_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    six_base_r_percents = six_base_r_summary.map{|m| (m[1].to_f/ six_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+    six_base_c_summary = six_base.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    six_base_c_percents = six_base_c_summary.map{|m| (m[1].to_f / six_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+
+    #7+ base
+    seven_up_base = filtered_sites.select{|m| m.strength == 7}
+    seven_up_base_r_summary = seven_up_base.map{|m| m.r_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    seven_up_base_r_percents = seven_up_base_r_summary.map{|m| (m[1].to_f/ seven_up_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+    seven_up_base_c_summary = seven_up_base.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    seven_up_base_c_percents = seven_up_base_c_summary.map{|m| (m[1].to_f / seven_up_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
+
+
     
     #strings for summary messages
     summary = "Overall Summary \n" + ""
@@ -125,7 +157,25 @@ class Genome < ActiveRecord::Base
     "The r-value distribution is #{template_r_summary.map{|m| m.join(" => ")}.join(", ")} representing #{template_r_percents.join(" and ")}\n" + 
     "The c-value distribution is #{template_c_summary.map{|m| m.join(" => ")}.join(", ")} representing #{template_c_percents.join(" and ")}\n"
 
-    report = [summary, r_value_summary, c_value_summary, strand_summary, gtgg_summary, gagg_summary, gaga_summary, plus_strand_summary, minus_strand_summary, coding_strand_summary, template_strand_summary].join("\n")
+    four_base_summary = "There are #{four_base.count} four_base strand sites. \n" + 
+    "The r-value distribution is #{four_base_r_summary.map{|m| m.join(" => ")}.join(", ")} representing #{four_base_r_percents.join(" and ")}\n" + 
+    "The c-value distribution is #{four_base_c_summary.map{|m| m.join(" => ")}.join(", ")} representing #{four_base_c_percents.join(" and ")}\n"
+
+    five_base_summary = "There are #{five_base.count} five_base strand sites. \n" + 
+    "The r-value distribution is #{five_base_r_summary.map{|m| m.join(" => ")}.join(", ")} representing #{five_base_r_percents.join(" and ")}\n" + 
+    "The c-value distribution is #{five_base_c_summary.map{|m| m.join(" => ")}.join(", ")} representing #{five_base_c_percents.join(" and ")}\n"
+
+    six_base_summary = "There are #{six_base.count} six_base strand sites. \n" + 
+    "The r-value distribution is #{six_base_r_summary.map{|m| m.join(" => ")}.join(", ")} representing #{six_base_r_percents.join(" and ")}\n" + 
+    "The c-value distribution is #{six_base_c_summary.map{|m| m.join(" => ")}.join(", ")} representing #{six_base_c_percents.join(" and ")}\n"
+
+    seven_up_base_summary = "There are #{seven_up_base.count} seven_up_base strand sites. \n" + 
+    "The r-value distribution is #{seven_up_base_r_summary.map{|m| m.join(" => ")}.join(", ")} representing #{seven_up_base_r_percents.join(" and ")}\n" + 
+    "The c-value distribution is #{seven_up_base_c_summary.map{|m| m.join(" => ")}.join(", ")} representing #{seven_up_base_c_percents.join(" and ")}\n"    
+
+
+
+    report = [summary, r_value_summary, c_value_summary, strand_summary, gtgg_summary, gagg_summary, gaga_summary, plus_strand_summary, minus_strand_summary, coding_strand_summary, template_strand_summary, four_base_summary, five_base_summary, six_base_summary, seven_up_base_summary].join("\n")
 
     return report
 	end
