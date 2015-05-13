@@ -23,6 +23,14 @@ class Site < ActiveRecord::Base
 		return rev_comp
 	end
 
+	def find_hydrolyzed_base
+		if self.ds_output.feature.strand == "+"
+			hb = self.hb_codon[self.c_value - 1]
+		elsif self.ds_output.feature.strand == "-"
+			hb = reverse_complement(self.hb_codon)[self.c_value - 1]
+		end
+	end
+
 	def find_codon
 		if self.ds_output_id != nil and self.ds_output.feature != nil and self.ds_output.feature.strand == "+" and self.ds_output.loop_seq.first == "G"
 			if r_value == 0 

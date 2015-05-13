@@ -10,6 +10,27 @@ class Genome < ActiveRecord::Base
 		
 	end
 
+  def fifty_k_groups
+
+    sites = Site.joins(ds_output: {feature: :gene}).where("sites.genome_id = #{self.id} and sites.c_value is not NULL and genes.pseudo_gene is not 'true'").all
+    high_pos = StemLoop.where(genome_id: self.id).last.loop_start_position
+
+    
+  end
+
+  def sixth_groups
+    high_pos = StemLoop.where(genome_id: self.id).last.loop_start_position / 6
+  end
+
+  def real_sites
+    Site.joins(ds_output: {feature: :gene}).where("sites.genome_id = #{self.id} and sites.c_value is not NULL and genes.pseudo_gene is not 'true'").all
+  end
+
+  def gaga_data
+    gaga_full = real_sites.select{|m| m.loop_seq == "GAGA"}
+    gaga = gaga_full.select{|m| m.ds_output.loop_seq}
+  end
+
 	def print_data
     sites = Site.joins(ds_output: {feature: :gene}).where("sites.genome_id = #{self.id} and sites.c_value is not NULL and genes.pseudo_gene is not 'true'").all
     repeat_array = sites.map{|m| [m.sequence, m.c_value, m.ds_output.feature.gene.name]}.uniq!
@@ -118,7 +139,18 @@ class Genome < ActiveRecord::Base
     seven_up_base_c_summary = seven_up_base.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
     seven_up_base_c_percents = seven_up_base_c_summary.map{|m| (m[1].to_f / seven_up_base.count.to_f) * 100}.map{|o| o.round(2).to_s + "%"}
 
+    #gaga_data
+    fun_gaga = gaga_coding + tctc_template
+    fun_tctc = gaga_template + tctc_coding
+    fun_gaga_1 = fun_gaga.select{|m| m.r_value == 1}
+    fun_gaga_2 = fun_gaga.select{|m| m.r_value == 2}
+    fun_tctc_1 = fun_tctc.select{|m| m.r_value == 1}
+    fun_tctc_2 = fun_tctc.select{|m| m.r_value == 2}
 
+    fun_gaga_1_summary = fun_gaga_1.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    fun_gaga_2_summary = fun_gaga_2.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    fun_tctc_1_summary = fun_tctc_1.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
+    fun_tctc_2_summary = fun_tctc_2.map{|m| m.c_value}.group_by{|x| x}.map{|k,v| [k, v.count]}.sort_by{|p| p[0]}
     
     #strings for summary messages
     summary = "Overall Summary \n" + ""
@@ -173,9 +205,13 @@ class Genome < ActiveRecord::Base
     "The r-value distribution is #{seven_up_base_r_summary.map{|m| m.join(" => ")}.join(", ")} representing #{seven_up_base_r_percents.join(" and ")}\n" + 
     "The c-value distribution is #{seven_up_base_c_summary.map{|m| m.join(" => ")}.join(", ")} representing #{seven_up_base_c_percents.join(" and ")}\n"    
 
+    gaga_data_summary = "There are #{fun_gaga.count} gaga sites and #{fun_tctc.count} tctc sites on coding strand. \n" +
+    "The c_value summary for gaga sites with r-value 1 is #{fun_gaga_1_summary.map{|m| m.join(" => ")}.join(", ")} \n" +
+    "The c_value summary for gaga sites with r-value 2 is #{fun_gaga_2_summary.map{|m| m.join(" => ")}.join(", ")} \n" +
+    "The c_value summary for tctc sites with r-value 1 is #{fun_tctc_1_summary.map{|m| m.join(" => ")}.join(", ")} \n" +
+    "The c_value summary for tctc sites with r-value 2 is #{fun_tctc_2_summary.map{|m| m.join(" => ")}.join(", ")} \n" 
 
-
-    report = [summary, r_value_summary, c_value_summary, strand_summary, gtgg_summary, gagg_summary, gaga_summary, plus_strand_summary, minus_strand_summary, coding_strand_summary, template_strand_summary, four_base_summary, five_base_summary, six_base_summary, seven_up_base_summary].join("\n")
+    report = [summary, r_value_summary, c_value_summary, strand_summary, gtgg_summary, gagg_summary, gaga_summary, plus_strand_summary, minus_strand_summary, coding_strand_summary, template_strand_summary, four_base_summary, five_base_summary, six_base_summary, seven_up_base_summary, gaga_data_summary].join("\n")
 
     return report
 	end
