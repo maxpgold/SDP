@@ -10,12 +10,29 @@ class Genome < ActiveRecord::Base
 		
 	end
 
-  def fifty_k_groups
+  def add_stem_loop_info(file)
+    stems_loops = stem_loops.all
 
+    lines = File.open(file).readlines
+    #Not sure if this always the number
+    lines.shift(8)
+    all_lines = lines.map{|l| l.chomp.delete("\\")}
+    genome_string = all_lines.pop.join
+    #work with file to get array of genome
+    stem_loops.each do |sl|
+      sl_array = genome_string[loop_start_position - 3 .. loop_start_position + 4]
+      sl.loop_plus_two = sl_array
+      sl.loop_plus_one = sl_array[1..6]
+      sl.loop_seq = sl_array[2..5]
+      sl.save
+    end
+  end
+
+
+
+  def fifty_k_groups
     sites = Site.joins(ds_output: {feature: :gene}).where("sites.genome_id = #{self.id} and sites.c_value is not NULL and genes.pseudo_gene is not 'true'").all
     high_pos = StemLoop.where(genome_id: self.id).last.loop_start_position
-
-    
   end
 
   def sixth_groups
@@ -31,7 +48,7 @@ class Genome < ActiveRecord::Base
     gaga = gaga_full.select{|m| m.ds_output.loop_seq}
   end
 
-	def print_data
+  def print_data
     sites = Site.joins(ds_output: {feature: :gene}).where("sites.genome_id = #{self.id} and sites.c_value is not NULL and genes.pseudo_gene is not 'true'").all
     repeat_array = sites.map{|m| [m.sequence, m.c_value, m.ds_output.feature.gene.name]}.uniq!
 		filtered_sites = []
