@@ -3,6 +3,18 @@ class Genome < ActiveRecord::Base
 	has_many :stem_loops
 	has_many :sites
 
+
+  def human_ds_output_sql(file, chromosome_id)
+    #based on below SQL
+    #INSERT INTO ds_outputs("sequence", "created_at", "updated_at", "genome_id", "chromosome_id")
+    f = File.open(file)
+    lines = f.readlines
+    return lines.first
+  end
+
+
+
+
 	def import_genome(file)
 		f = File.open(file)
 		lines = f.readlines

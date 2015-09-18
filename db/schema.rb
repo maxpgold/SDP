@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150219033850) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "amino_acids", force: true do |t|
     t.string   "amino_acid_symbol"
     t.string   "amino_acid_letter"
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150219033850) do
     t.datetime "updated_at"
   end
 
-  add_index "ds_output_genes", ["gene_id", "ds_output_id"], name: "index_ds_output_genes_on_gene_id_and_ds_output_id"
+  add_index "ds_output_genes", ["gene_id", "ds_output_id"], name: "index_ds_output_genes_on_gene_id_and_ds_output_id", using: :btree
 
   create_table "ds_outputs", force: true do |t|
     t.string   "sequence"
