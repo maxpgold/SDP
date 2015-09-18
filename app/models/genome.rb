@@ -6,10 +6,19 @@ class Genome < ActiveRecord::Base
 
   def human_ds_output_sql(file, chromosome_id)
     #based on below SQL
-    #INSERT INTO ds_outputs("sequence", "created_at", "updated_at", "genome_id", "chromosome_id")
+    #INSERT INTO ds_outputs("sequence", "created_at", "updated_at", "genome_id", "chromosome_id", "site_type", "strength", "loop_start_position")
     f = File.open(file)
     lines = f.readlines
-    return lines.first
+    lines.pop
+    lines.pop
+
+    big_array = []
+
+    lines.each do |l, index|
+      data = l.split(" ")
+      big_array.push("(" + ["'" + data[11].delete(".") + "'", 'now()', 'now()', id, chromosome_id, "'" + data[2] + "'", data[5], data[0]].join(', ') + ")")
+    end
+    return big_array.join(", ")
   end
 
 
