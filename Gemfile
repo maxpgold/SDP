@@ -37,6 +37,8 @@ gem "handle_invalid_percent_encoding_requests"
 
 gem 'haml-rails', '>= 0.3.4', :group => :development
 
+gem 'pg', '~> 0.18.2'
+
 
 #575651 / 701713 / 2409782 / 3727256 / 4285804
 
